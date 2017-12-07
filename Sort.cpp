@@ -26,6 +26,31 @@ int BubbleSort(int arr[], int n)
 	return 0;
 }
 
+int SelectSort(int arr[], int n)
+{
+	int min;
+	for (int i = 0; i < n; i++)
+	{
+		min = i;
+		for (int j = i+1; j < n; j++)
+		{
+			if (arr[i] > arr[j])
+			{
+				min = j;
+			}
+		}
+
+		if (min != i)
+		{
+			int tmp = arr[min];
+			arr[min] = arr[i];
+			arr[i] = tmp;
+		}
+	}
+
+	return 0;
+}
+
 int PrintSort(int arr[],int n)
 {
     for (int i = 0; i < n; i++)
@@ -42,7 +67,8 @@ int main()
 {
 	int arr[10] = {1,3,5,4,2,7,8,9,0,6};
 
-	BubbleSort(arr,10);
+	// BubbleSort(arr,10);
+	SelectSort(arr,10);
 	PrintSort(arr,10);
   
 	return 0;
