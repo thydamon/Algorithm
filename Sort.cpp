@@ -91,6 +91,32 @@ int InsertSort(int arr[], int n)
 	return 0;
 }
 
+int ShellSort(int arr[], int n)
+{
+	int i,j,gap;
+
+	gap = n/2;
+
+	while (1 <= gap)
+	{
+		for (i = gap; i < n; i++)
+		{
+			if (arr[i-gap] > arr[i])
+			{
+				int tmp = arr[i];
+				for (j = i-gap; arr[j] > tmp && j >= 0; j -= gap)
+				{
+					arr[j+gap] = arr[j];
+				}
+				arr[j+gap] = tmp;
+			}
+		}
+		gap = gap/2;
+	}
+
+	return 0;
+}
+
 int PrintSort(int arr[],int n)
 {
     for (int i = 0; i < n; i++)
@@ -109,7 +135,8 @@ int main()
 
 	// BubbleSort(arr,10);
 	// SelectSort(arr,10);
-	InsertSort(arr,10);
+	// InsertSort(arr,10);
+	ShellSort(arr,10);
 	PrintSort(arr,10);
   
 	return 0;
