@@ -123,20 +123,18 @@ int Merge(int arr[],int a,int mid,int b)
 {
     int i,j,k;
 	//int *arr2 = (int *)malloc(b*sizeof(arr));
-	int *arr2 = new int[b];
+	int *arr2 = new int[b+1];
 
-    for (k = 0; k < b; k++) 
+    for (k = 0; k <= b; k++) 
 	{
         arr2[k] = arr[k]; 
 	}
 
 	k = 0;
 	i = a;
-	j = mid;
+	j = mid+1;
 
-	cout << "mid:" << mid << endl;
-
-	while (i < mid && j < b)
+	while (i <= mid && j <= b)
 	{
 		if (arr2[i] < arr2[j])
 		{
@@ -148,16 +146,18 @@ int Merge(int arr[],int a,int mid,int b)
 		}
 	}
 
-    while (i < mid)
+    while (i <= mid)
 	{
 		arr[k++] = arr2[i++];
 	}
 
-	while (j < b)
+	while (j <= b)
 	{
 		arr[k++] = arr2[j++];
 	}
-
+    
+	cout << a <<"|" << mid << "|" << b << endl;
+	PrintSort(arr,10);
 	// free(arr2);
 	delete[] arr2;
 
@@ -166,12 +166,43 @@ int Merge(int arr[],int a,int mid,int b)
 
 int MergeSort(int arr[],int a, int b)
 {
-	if (a < b)
+	if (a <= b)
 	{
 		int mid = (a + b)/2;
 		MergeSort(arr,0,mid);
 		MergeSort(arr,mid+1,b);
 		Merge(arr,0,mid,b);
+	}
+
+	return 0;
+}
+
+int MergeSort2(int arr[],int n)
+{
+	int gap = 0;
+	int i = 0;
+	int mid = 0;
+
+	gap = 2;
+    
+	while (gap < n)
+	{
+		i = 0;
+		mid = 0;
+
+		while (i + gap + 1< n)
+		{
+			mid = (i + i + gap) / 2;
+			cout << "i:" << i << " mid:" << mid << " gap:"<< gap  << endl;
+			Merge(arr,i,mid,i+gap);
+			i = i + gap + 1;
+		}
+
+		mid = (i + n) / 2;
+		cout << "i:" << i << " mid:" << mid << " gap:"<< gap  << endl;
+		Merge(arr,i,mid,n-1);
+
+		gap = gap * 2 ;
 	}
 
 	return 0;
@@ -197,9 +228,10 @@ int main()
 	// SelectSort(arr,10);
 	// InsertSort(arr,10);
 	// ShellSort(arr,10);
+	MergeSort(arr,0,9);
 	PrintSort(arr,10);
-	MergeSort(arr,0,10);
-	PrintSort(arr,10);
+	//MergeSort2(arr,9);
+	//PrintSort(arr,10);
   
 	return 0;
 }
