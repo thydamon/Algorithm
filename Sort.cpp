@@ -7,7 +7,6 @@
 
 #include <iostream>
 using namespace std;
-#include <malloc.h>
 
 int PrintSort(int arr[],int n);
 
@@ -109,69 +108,10 @@ int ShellSort(int arr[], int n)
 				{
 					arr[j+gap] = arr[j];
 				}
-
 				arr[j+gap] = tmp;
 			}
 		}
 		gap = gap/2;
-	}
-
-	return 0;
-}
-
-int Merge(int arr[],int a,int mid,int b)
-{
-    int i,j,k;
-	//int *arr2 = (int *)malloc(b*sizeof(arr));
-	int *arr2 = new int[b];
-
-    for (k = 0; k < b; k++) 
-	{
-        arr2[k] = arr[k]; 
-	}
-
-	k = 0;
-	i = a;
-	j = mid;
-
-	cout << "mid:" << mid << endl;
-
-	while (i < mid && j < b)
-	{
-		if (arr2[i] < arr2[j])
-		{
-			arr[k++] = arr2[i++];
-		}
-		else
-		{
-			arr[k++] = arr2[j++];
-		}
-	}
-
-    while (i < mid)
-	{
-		arr[k++] = arr2[i++];
-	}
-
-	while (j < b)
-	{
-		arr[k++] = arr2[j++];
-	}
-
-	// free(arr2);
-	delete[] arr2;
-
-    return 0;
-}
-
-int MergeSort(int arr[],int a, int b)
-{
-	if (a < b)
-	{
-		int mid = (a + b)/2;
-		MergeSort(arr,0,mid);
-		MergeSort(arr,mid+1,b);
-		Merge(arr,0,mid,b);
 	}
 
 	return 0;
@@ -196,9 +136,7 @@ int main()
 	// BubbleSort(arr,10);
 	// SelectSort(arr,10);
 	// InsertSort(arr,10);
-	// ShellSort(arr,10);
-	PrintSort(arr,10);
-	MergeSort(arr,0,10);
+	ShellSort(arr,10);
 	PrintSort(arr,10);
   
 	return 0;
